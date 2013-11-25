@@ -16,7 +16,7 @@ var Settings = {
 	changeImg : 'http://web-bertram.ru/images/icons/4551369402471628.png',
 	imgWidth : 100,
 	gameTime : 20,
-	mainSpeed : 30,
+	mainSpeed : 50,
 	speedStep : 3,
 	amount : 7,
 	positionY : [],
