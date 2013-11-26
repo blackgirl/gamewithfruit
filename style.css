@@ -33,7 +33,7 @@
 		position : absolute;
 		z-index : 99;
 		width : 300px;
-		height : 200px;
+		height : 240px;
 		text-align : center;
 		padding : 40px 0 0;
 		box-sizing : border-box;
@@ -43,9 +43,28 @@
 		border-radius : 20px;
 		top : 50%;
 		left : 50%;
-		margin-top : -100px;
+		margin-top : -120px;
 		margin-left : -150px;
 		font : 1.5em Arial;
+		color : white;
+		display: none;
+	}
+	.radio-toolbar {
+		position : absolute;
+		z-index : 99;
+		width : 360px;
+		height : 280px;
+		text-align : center;
+		box-sizing : border-box;
+		top : 50%;
+		left : 50%;
+		margin-top : -140px;
+		margin-left : -180px;
+		background : rgba(217, 232, 201, .9);
+		-webkit-border-radius : 20px;
+		-moz-border-radius : 20px;
+		border-radius : 20px;
+		font : 1.2em Arial;
 		color : white;
 	}
 	.wrap-count {
@@ -55,18 +74,42 @@
 		bottom : 0;
 		z-index : 98;
 		text-align : center;
-		background : rgba(217, 232, 201, .7);
+		background : rgba(217, 232, 201, .9);
 		font : bold 1.5em Arial;
-		color : red;
+		color : #D1350F;
 	}
 	#count {
 		line-height : 50px;
+	}
+	.choice {
+		font: bold 1.5em Arial;
+		color: #D1350F;
+	}
+	p {
+		width: 100%;
+		text-align: center;
+		font: 1.3em Arial;
+	}
+	.radio-toolbar .sel {
+	    display : none;
+	}
+	.radio-toolbar label {
+	    display : inline-block;
+	    opacity : .5
+	}
+	.juice {
+		position: relative;
+	    width: 80px;
+	}
+
+	.radio-toolbar .sel:checked + label {
+	    opacity: 1.0
 	}
 	button {
 		padding : 10px 30px;
 		border : none;
 		background : #68A527;
-		font-size : 1.5em;
+		font-size : 1.3em;
 		color : white;
 		-moz-border-radius : 10px;
         -webkit-border-radius : 10px;
@@ -82,15 +125,36 @@
 		-webkit-box-shadow : 0px 0px 0px rgba(50, 50, 50, 0.75);
 		-moz-box-shadow : 0px 0px 0px rgba(50, 50, 50, 0.75);
 	}
+	.start {
+		margin: 20px auto;
+	}
 @media screen and (min-width : 320px) and (max-width : 570px) {
 	.first {
 		width: 100%;
-		height: 300px;
-		margin-top: -150px;
+		height: 310px;
+		margin-top: -160px;
 	}
 	.modal {
 		width: 250px;
 		margin-left: -125px;
+	}
+	.radio-toolbar {
+		width: 300px;
+		height: 240px;
+		margin-left: -150px;
+		-webkit-border-radius : 0;
+		-moz-border-radius : 0;
+		border-radius : 0;
+	}
+	p {
+		margin: 10px;
+	}
+}
+@media screen and (min-width : 600px) and (max-width : 768px) {
+	.first {
+		width: 80%;
+		height: 600px;
+		margin-top: -300px;
 	}
 }
 @media screen and (min-width : 1900px) {

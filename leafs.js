@@ -7,13 +7,14 @@
 // gameTime — how long can you play (10s)
 var Settings = {
 	imgArray : [
-		"http://www.coppschool.lancsngfl.ac.uk/Classwork/Classwork/Class3/Backgrounds/apple.gif",
-		"http://www.i2clipart.com/cliparts/b/9/2/b/clipart-bananas-b92b.png",
-		"http://www.i2clipart.com/cliparts/a/7/2/b/clipart-pineapple-a72b.png",
-		"http://www.i2clipart.com/cliparts/5/2/8/8/clipart-simple-fruit-orange-5288.png",
-		"http://www.i2clipart.com/cliparts/a/2/a/0/clipart-simple-fruit-pear-a2a0.png"
-		],
+		{ class : "apple", src : "http://www.coppschool.lancsngfl.ac.uk/Classwork/Classwork/Class3/Backgrounds/apple.gif" },
+		{ class : "banana", src : "http://www.i2clipart.com/cliparts/b/9/2/b/clipart-bananas-b92b.png" },
+		{ class : "pear", src : "http://www.i2clipart.com/cliparts/a/2/a/0/clipart-simple-fruit-pear-a2a0.png" },
+		{ class : "", src : "http://www.i2clipart.com/cliparts/a/7/2/b/clipart-pineapple-a72b.png" },
+		{ class : "", src : "http://www.i2clipart.com/cliparts/5/2/8/8/clipart-simple-fruit-orange-5288.png" }
+	],
 	changeImg : 'http://web-bertram.ru/images/icons/4551369402471628.png',
+	changeImgX : 'http://www.clker.com/cliparts/a/6/e/8/119498563188281957tasto_8_architetto_franc_01.svg.med.png',
 	imgWidth : 100,
 	gameTime : 20,
 	mainSpeed : 50,
@@ -23,27 +24,48 @@ var Settings = {
 	positionX : [],
 	speed : [],
 	bounce : 0,
+	juice : '',
+	area : document.getElementById( 'fallArea' ),
+	getJuice : function() {
+		var selectJuice = document.getElementsByTagName( 'input' );
+		this.juice = '';
+
+		for ( var i = 0; i < selectJuice.length; i++ ) {
+			if ( selectJuice[ i ].type == 'radio' && selectJuice[ i ].checked ) {
+					this.juice = selectJuice[ i ].value;
+					document.querySelector( '.choice' ).innerHTML = this.juice;
+			}
+		}
+	},
 	getRandomImage : function() {
 		var n = Math.floor( Math.random() * this.imgArray.length );
 		randomImage = this.imgArray[ n ];
 		return randomImage;
 	},
+	setClickFunc : function() {
+		var imgs = this.area.getElementsByTagName( 'img' );
+	    for( var i = 0; i < imgs.length; i++ ) {
+	    	imgs[ i ].onclick = '';
+            if ( imgs[ i ].className == this.juice ) {
+				imgs[ i ].onclick = function() {
+			            	this.src = Settings.changeImg;
+			                Settings.bounce++;
+			            };
+			} else {
+				imgs[ i ].onclick = function() {
+			            	this.src = Settings.changeImgX;
+			            }
+			}
+		}
+	},
 	writeImages : function() {
-		var area = document.getElementById( 'fallArea' );
-		area.innerHTML = '';
+		this.area.innerHTML = '';
 		for( var i = 0; i < this.amount; i++ ) {
 			imageSrc = this.getRandomImage();
-			area.innerHTML += '<img id="fruit'+ i +'" src="'+ imageSrc +'" style="width:'+this.imgWidth+'px">';
+			this.area.innerHTML += '<img id="fruit'+ i +'" class="'+ imageSrc.class +'" src="'+ imageSrc.src +'" style="width:'+this.imgWidth+'px">';
 		}
-	    var imgs = document.getElementsByTagName( 'img' );
-	    for( var i = 0; i < imgs.length; i++ ) {
-            imgs[ i ].onclick = function() {
-            	this.src = Settings.changeImg;
-            	this.className = "cha";
-                Settings.bounce++;
-            }
-	    }
-	}
+		this.setClickFunc();
+    }
 };
 
 // Object Coords contains methods:
@@ -94,6 +116,7 @@ var Fall = {
 		Fall.repeatTime = Settings.gameTime;
 		this.countArea.innerHTML = 'Your score: '+ Settings.bounce;
 		document.querySelector('.wrap-modal').style.display = 'block';
+		document.querySelector( '.radio-toolbar' ).style.display = 'block';
 		Settings.bounce = 0;
 	},
 	startPosition : function() {
@@ -125,7 +148,10 @@ var Fall = {
 					Settings.positionY[ i ] = 0 - 1.5*Settings.imgWidth;
 					Settings.positionX[ i ] = Coords.getRandomXPos();
 					Settings.speed[ i ] = Coords.getRandomSpeed( Settings.speedStep );
-					fruit.src = Settings.getRandomImage();
+					var random = Settings.getRandomImage();
+					fruit.src = random.src;
+					fruit.className = random.class;
+					Settings.setClickFunc();
 				}
 				fruit.style.left = Settings.positionX[ i ] + 'px';
 				fruit.style.top = Settings.positionY[ i ] + 'px';
@@ -141,6 +167,12 @@ var Fall = {
 		};
 		Fall.counter();
 	}
+};
+
+document.querySelector('.go').onclick = function() {
+	Settings.getJuice();
+	document.querySelector( '.radio-toolbar' ).style.display = 'none';
+	document.querySelector('.modal').style.display = 'block';
 };
 
 document.querySelector('.start').onclick = function() {
