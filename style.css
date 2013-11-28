@@ -47,7 +47,6 @@
 		margin-left : -150px;
 		font-size : 1.5em;
 		font-family: 'Finger Paint', cursive;
-
 		color : white;
 		display: none;
 	}
@@ -75,12 +74,12 @@
 		z-index : 99;
 		display: none;
 		width: 300px;
-		height : 280px;
+		height : 270px;
 		text-align : center;
 		box-sizing : border-box;
 		top : 50%;
 		left : 50%;
-		margin-top : -140px;
+		margin-top : -135px;
 		margin-left: -150px;
 		padding: 20px;
 		background: rgba(217, 232, 201, .95);
