@@ -14,9 +14,9 @@ var Settings = {
 		{ class : "", src : "http://www.i2clipart.com/cliparts/5/2/8/8/clipart-simple-fruit-orange-5288.png" }
 	],
 	changeImg : 'http://web-bertram.ru/images/icons/4551369402471628.png',
-	changeImgX : 'http://www.clker.com/cliparts/a/6/e/8/119498563188281957tasto_8_architetto_franc_01.svg.med.png',
+	changeImgX : 'http://openclipart.org/image/800px/svg_to_png/171390/checkErro.png',
 	imgWidth : 100,
-	gameTime : 20,
+	gameTime : 10,
 	mainSpeed : 50,
 	speedStep : 3,
 	amount : 7,
@@ -24,6 +24,7 @@ var Settings = {
 	positionX : [],
 	speed : [],
 	bounce : 0,
+	bounceWrong : 0,
 	juice : '',
 	area : document.getElementById( 'fallArea' ),
 	getJuice : function() {
@@ -44,7 +45,8 @@ var Settings = {
 	},
 	setClickFunc : function() {
 		var imgs = this.area.getElementsByTagName( 'img' );
-	    for( var i = 0; i < imgs.length; i++ ) {
+		var len = imgs.length;
+	    for( var i = 0; i < len; i++ ) {
 	    	imgs[ i ].onclick = '';
             if ( imgs[ i ].className == this.juice ) {
 				imgs[ i ].onclick = function() {
@@ -54,6 +56,7 @@ var Settings = {
 			} else {
 				imgs[ i ].onclick = function() {
 			            	this.src = Settings.changeImgX;
+			            	Settings.bounceWrong++;
 			            }
 			}
 		}
@@ -114,10 +117,18 @@ var Fall = {
 	clear : function() {
 		Fall.fallTimer = 'undefined';
 		Fall.repeatTime = Settings.gameTime;
-		this.countArea.innerHTML = 'Your score: '+ Settings.bounce;
+		this.countArea.innerHTML = 'Your score: '+ Settings.bounce*10;
+		// 'You squashed '+ Settings.bounce +' fruits right and ' +Settings.bounceWrong+' wrong.';
+		document.getElementById( 'right' ).innerHTML += Settings.bounce;
+		document.getElementById( 'wrong' ).innerHTML += Settings.bounceWrong;
+		document.querySelector('.gameover').style.display = 'block';
 		document.querySelector('.wrap-modal').style.display = 'block';
-		document.querySelector( '.radio-toolbar' ).style.display = 'block';
+		
 		Settings.bounce = 0;
+		Settings.bounceWrong = 0;
+	},
+	endOfGame : function() {
+
 	},
 	startPosition : function() {
 		for( var i = 0; i < Settings.amount; i++ ) {
@@ -168,14 +179,17 @@ var Fall = {
 		Fall.counter();
 	}
 };
-
-document.querySelector('.go').onclick = function() {
+document.querySelector( '.again' ).onclick = function() {
+	document.querySelector('.gameover').style.display = 'none';
+	document.querySelector( '.radio-toolbar' ).style.display = 'block';
+};
+document.querySelector( '.go' ).onclick = function() {
 	Settings.getJuice();
 	document.querySelector( '.radio-toolbar' ).style.display = 'none';
 	document.querySelector('.modal').style.display = 'block';
 };
 
-document.querySelector('.start').onclick = function() {
-	document.querySelector('.wrap-modal').style.display = 'none';
+document.querySelector( '.start' ).onclick = function() {
+	document.querySelector( '.wrap-modal' ).style.display = 'none';
 	Fall.go();
 };

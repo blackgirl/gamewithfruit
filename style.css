@@ -1,4 +1,4 @@
-.first {
+	.first {
 		width : 60%;
 		height : 400px;
 		position : relative;
@@ -35,9 +35,9 @@
 		width : 300px;
 		height : 240px;
 		text-align : center;
-		padding : 40px 0 0;
+		padding : 20px 0 0;
 		box-sizing : border-box;
-		background : rgba(217, 232, 201, .5);
+		background : rgba(217, 232, 201, .8);
 		-webkit-border-radius : 20px;
 		-moz-border-radius : 20px;
 		border-radius : 20px;
@@ -45,7 +45,9 @@
 		left : 50%;
 		margin-top : -120px;
 		margin-left : -150px;
-		font : 1.5em Arial;
+		font-size : 1.5em;
+		font-family: 'Finger Paint', cursive;
+
 		color : white;
 		display: none;
 	}
@@ -64,8 +66,35 @@
 		-webkit-border-radius : 20px;
 		-moz-border-radius : 20px;
 		border-radius : 20px;
-		font : 1.2em Arial;
+		font-size : 1.2em;
+		font-family: 'Finger Paint', cursive;
 		color : white;
+	}
+	.gameover {
+		position : absolute;
+		z-index : 99;
+		display: none;
+		width: 300px;
+		height : 280px;
+		text-align : center;
+		box-sizing : border-box;
+		top : 50%;
+		left : 50%;
+		margin-top : -140px;
+		margin-left: -150px;
+		padding: 20px;
+		background: rgba(217, 232, 201, .95);
+
+	}
+	.gameover>span {
+		font-size : 1.4em;
+		font-family: 'Finger Paint', cursive;
+		font-style: bold;
+		color: #D1350F;
+		line-height: 1.3em;
+	}
+	#choose {
+		color: white;
 	}
 	.wrap-count {
 		position : absolute;
@@ -75,20 +104,29 @@
 		z-index : 98;
 		text-align : center;
 		background : rgba(217, 232, 201, .9);
-		font : bold 1.5em Arial;
+		font-size : 1.5em;
+		font-family: 'Finger Paint', cursive;
+		font-style: bold;
 		color : #D1350F;
 	}
 	#count {
 		line-height : 50px;
 	}
 	.choice {
-		font: bold 1.5em Arial;
+		font-size : 1.5em;
+		font-family: 'Finger Paint', cursive;
+		font-style: bold;
 		color: #D1350F;
 	}
 	p {
 		width: 100%;
 		text-align: center;
-		font: 1.3em Arial;
+		font-size : 1.3em;
+		font-family: 'Finger Paint', cursive;
+	}
+	.again {
+		width: 200px;
+		margin: 20px auto;
 	}
 	.radio-toolbar .sel {
 	    display : none;
@@ -135,8 +173,11 @@
 		margin-top: -160px;
 	}
 	.modal {
-		width: 250px;
-		margin-left: -125px;
+		width: 300px;
+		height: 240px;
+		margin-left: -150px;
+		margin-top: -140px;
+		border-radius: 0;
 	}
 	.radio-toolbar {
 		width: 300px;
@@ -145,6 +186,16 @@
 		-webkit-border-radius : 0;
 		-moz-border-radius : 0;
 		border-radius : 0;
+	}
+	.gameover {
+		height: 240px;
+	}
+	.gameover>span {
+		font-size : 1.3em;
+		line-height: 1.3em;
+	}
+	.again {
+		margin: 30px auto;
 	}
 	p {
 		margin: 10px;
