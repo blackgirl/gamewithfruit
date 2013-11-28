@@ -16,7 +16,7 @@ var Settings = {
 	changeImg : 'http://web-bertram.ru/images/icons/4551369402471628.png',
 	changeImgX : 'http://openclipart.org/image/800px/svg_to_png/171390/checkErro.png',
 	imgWidth : 100,
-	gameTime : 10,
+	gameTime : 25,
 	mainSpeed : 50,
 	speedStep : 3,
 	amount : 7,
